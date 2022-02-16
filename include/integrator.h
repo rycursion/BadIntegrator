@@ -1,4 +1,6 @@
-float linIntegrate(float a, float b, float c, float sampleRate, int lLimit, int uLimit)
+#include<cmath>
+
+float linIntegrate(float a[], int degree, float sampleRate, int lLimit, int uLimit)
 {
 	//printf("Integration started\n");
 	//determine sample width
@@ -9,9 +11,13 @@ float linIntegrate(float a, float b, float c, float sampleRate, int lLimit, int 
 	//std::cout<<"numsamples"<<numSamples<<std::endl;
 	float integral=0.0;
 	//create vector of samples
-	for (float i = lLimit; i <= uLimit ; i+=deltaT)
+	for (int j = 0; j < degree; ++j)
 	{
-		integral+=(a*i*i + b*i +c)*deltaT;
+		for (float i = lLimit; i <= uLimit ; i+=deltaT)	//for each sampling point
+		{
+			integral+=a[j]*pow(i,j)*deltaT;
+		}
+
 	}
 
 	return integral;
